@@ -1,0 +1,16 @@
+<div *ngIf="!isPopUpActive" class="popup-bg"></div>
+
+<div *ngIf="isPopUpActive" class="gallery-popup">
+  <div class="search-wrapper">
+    <input [(ngModel)]="searchStr" placeholder="search by title" >
+  </div>
+  <div class="cards-wrapper">
+    <div *ngFor ="let photo of photos | filterPipe:searchStr:'title'" class="card">
+      <img src="{{'https://farm' + photo.farm +'.staticflickr.com/'+photo.server+'/'+photo.id+'_'+photo.secret+'.jpg'}}" alt="Sample photo">
+      <p class="title">{{photo.title| shortenPipe:15 }}</p>
+    </div>
+  </div>
+  <div class="footer">
+    <div (click)="popupStatus()" class="close-btn">&times;</div>
+  </div>
+</div>
